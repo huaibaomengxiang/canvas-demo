@@ -1,6 +1,5 @@
 # canvas-demo
-
-> A package project
+使用 canvas 制作的一些好玩的 demo
 
 ## Construction
 ```
