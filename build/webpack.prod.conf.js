@@ -46,7 +46,7 @@ var webpackConfig = {
         loader: 'url-loader',
         options: {
           limit: 10000,
-          name: path.join('', '[name].[ext]')
+          name: path.join('assets', '[name].[ext]')
         }
       }
     ]
