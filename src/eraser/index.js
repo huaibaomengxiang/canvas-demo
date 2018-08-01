@@ -20,10 +20,16 @@ img.onload = function () {
   tapClip()
 }
 
-function getClipArea (e, hastouch) {
+var hastouch = 'ontouchstart' in window,
+  tapstart = hastouch ? 'touchstart' : 'mousedown',
+  tapmove = hastouch ? 'touchmove' : 'mousemove',
+  tapend = hastouch ? 'touchend' : 'mouseup'
+
+function getClipArea (e) {
   var x = hastouch ? e.targetTouches[0].pageX : e.clientX
   var y = hastouch ? e.targetTouches[0].pageY : e.clientY
   var ndom = canvas
+  // 获得在 canvas 画布中的位置
   while (ndom.tagName !== 'BODY') {
     x -= ndom.offsetLeft
     y -= ndom.offsetTop
@@ -37,10 +43,6 @@ function getClipArea (e, hastouch) {
 
 // 通过修改globalCompositeOperation来达到擦除的效果
 function tapClip () {
-  var hastouch = 'ontouchstart' in window,
-    tapstart = hastouch ? 'touchstart' : 'mousedown',
-    tapmove = hastouch ? 'touchmove' : 'mousemove',
-    tapend = hastouch ? 'touchend' : 'mouseup'
   var area
   var x2, y2
   ctx.lineCap = 'round'
@@ -50,7 +52,7 @@ function tapClip () {
   window.addEventListener(tapstart, function (e) {
     clearTimeout(timeout)
     e.preventDefault()
-    area = getClipArea(e, hastouch)
+    area = getClipArea(e)
     x1 = area.x
     y1 = area.y
     drawLine(x1, y1)
@@ -80,7 +82,7 @@ function tapClip () {
     function tapmoveHandler (e) {
       clearTimeout(timeout)
       e.preventDefault()
-      area = getClipArea(e, hastouch)
+      area = getClipArea(e)
       x2 = area.x
       y2 = area.y
       drawLine(x1, y1, x2, y2)

@@ -4,7 +4,7 @@ const path = require('path')
 const utils = require('./utils')
 
 var webpackConfig = {
-  entry: utils.getEntry('src/**/index.js'),
+  entry: utils.getEntry('src/**/index.js',  /^(util)$/),
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name]-[hash:5].js'
