@@ -1,107 +1,16 @@
 import './index.scss'
+// import Eraser from './eraser.js'
+import kit from '../../package/canvas-kit'
+var Eraser = kit.Eraser
 
-var canvas = document.getElementById('cas'),
-  ctx = canvas.getContext('2d'),
-  x1,
-  y1,
-  a = 30,
-  timeout,
-  totimes = 100,
-  distance = 30
+new Eraser({
+  container: document.getElementById('aa'),
+  frontImg: require('../assets/eraser1.jpg'),
+  backImg: require('../assets/eraser2.jpg')
+})
 
-var canvasBox = document.getElementById('bb')
-canvas.width = canvasBox.clientWidth
-canvas.height = canvasBox.clientHeight
-var img = new Image()
-img.src = require('../assets/pic2.jpg')
-img.onload = function () {
-  var w = (canvas.height * img.width) / img.height
-  ctx.drawImage(img, (canvas.width - w) / 2, 0, w, canvas.height)
-  tapClip()
-}
-
-var hastouch = 'ontouchstart' in window,
-  tapstart = hastouch ? 'touchstart' : 'mousedown',
-  tapmove = hastouch ? 'touchmove' : 'mousemove',
-  tapend = hastouch ? 'touchend' : 'mouseup'
-
-function getClipArea (e) {
-  var x = hastouch ? e.targetTouches[0].pageX : e.clientX
-  var y = hastouch ? e.targetTouches[0].pageY : e.clientY
-  var ndom = canvas
-  // 获得在 canvas 画布中的位置
-  while (ndom.tagName !== 'BODY') {
-    x -= ndom.offsetLeft
-    y -= ndom.offsetTop
-    ndom = ndom.parentNode
-  }
-  return {
-    x: x,
-    y: y
-  }
-}
-
-// 通过修改globalCompositeOperation来达到擦除的效果
-function tapClip () {
-  var area
-  var x2, y2
-  ctx.lineCap = 'round'
-  ctx.lineJoin = 'round'
-  ctx.lineWidth = a * 2
-  ctx.globalCompositeOperation = 'destination-out'
-  window.addEventListener(tapstart, function (e) {
-    clearTimeout(timeout)
-    e.preventDefault()
-    area = getClipArea(e)
-    x1 = area.x
-    y1 = area.y
-    drawLine(x1, y1)
-    this.addEventListener(tapmove, tapmoveHandler)
-    this.addEventListener(tapend, function () {
-      this.removeEventListener(tapmove, tapmoveHandler)
-      // 检测擦除状态
-      timeout = setTimeout(function () {
-        var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-        var dd = 0
-        for (var x = 0; x < imgData.width; x += distance) {
-          for (var y = 0; y < imgData.height; y += distance) {
-            var i = (y * imgData.width + x) * 4
-            if (imgData.data[i + 3] > 0) {
-              dd++
-            }
-          }
-        }
-        if (
-          dd / ((imgData.width * imgData.height) / (distance * distance)) <
-          0.4
-        ) {
-          canvas.className = 'noOp'
-        }
-      }, totimes)
-    })
-    function tapmoveHandler (e) {
-      clearTimeout(timeout)
-      e.preventDefault()
-      area = getClipArea(e)
-      x2 = area.x
-      y2 = area.y
-      drawLine(x1, y1, x2, y2)
-      x1 = x2
-      y1 = y2
-    }
-  })
-}
-
-function drawLine (x1, y1, x2, y2) {
-  ctx.save()
-  ctx.beginPath()
-  if (arguments.length === 2) {
-    ctx.arc(x1, y1, a, 0, 2 * Math.PI)
-    ctx.fill()
-  } else {
-    ctx.moveTo(x1, y1)
-    ctx.lineTo(x2, y2)
-    ctx.stroke()
-  }
-  ctx.restore()
-}
+new Eraser({
+  container: document.getElementById('bb'),
+  frontImg: require('../assets/eraser2.jpg'),
+  backImg: require('../assets/eraser1.jpg')
+})
