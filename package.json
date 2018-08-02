@@ -9,7 +9,7 @@
     "build": "webpack --config build/webpack.prod.conf.js",
     "start": "npm run dev",
     "output": "webpack --config build/webpack.output.conf.js",
-    "publish": "npm run output && npm version patch && npm publish"
+    "tonpm": "npm run output && npm version patch && npm publish"
   },
   "main": "package/canvas-kit.js",
   "keywords": [
