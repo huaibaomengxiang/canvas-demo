@@ -5,11 +5,13 @@ class Eraser {
     this.container = option.container
     this.frontImg = option.frontImg
     this.backImg = option.backImg
+    this.radius = option.radius || 30 // 橡皮擦半径
     this.init()
   }
 
   init () {
     let container = this.container
+    let radius = this.radius
     container.style.backgroundImage = `url(${this.backImg})`
     container.style.backgroundRepeat = `no-repeat`
     container.style.backgroundPosition = `center`
@@ -17,10 +19,9 @@ class Eraser {
 
     var x1,
       y1,
-      a = 30,
       timeout,
       totimes = 100,
-      distance = 30 // 橡皮擦半径
+      distance = 30
 
     var canvas = document.createElement('canvas')
     container.appendChild(canvas)
@@ -47,7 +48,7 @@ class Eraser {
       var x2, y2
       ctx.lineCap = 'round' // 设置线条两端为圆弧
       ctx.lineJoin = 'round' // 设置线条转折为圆弧
-      ctx.lineWidth = a * 2
+      ctx.lineWidth = radius * 2
       // 通过设置 globalCompositeOperation 为 destination-out 来实现擦除的效果
       ctx.globalCompositeOperation = 'destination-out'
       container.addEventListener(tapstart, function (e) {
@@ -56,7 +57,7 @@ class Eraser {
         area = getClipArea(e)
         x1 = area.x
         y1 = area.y
-        fillArc(ctx, x1, y1, a, 0, 2 * Math.PI)
+        fillArc(ctx, x1, y1, radius, 0, 2 * Math.PI)
         this.addEventListener(tapmove, tapmoveHandler)
         this.addEventListener(tapend, function () {
           // 清除移动监听
