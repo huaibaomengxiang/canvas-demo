@@ -19,10 +19,11 @@ new Eraser({
 ```
 
 ## API
-### 构造器
-[Eraser构造器](https://github.com/hamger/canvas-demo/tree/master/src/eraser) 快速实现橡皮擦效果
 
-[Magnifier构造器](https://github.com/hamger/canvas-demo/tree/master/src/magnifier) 快速实现放大镜效果
+构造器 | 描述
+--- | ---
+[Eraser](https://github.com/hamger/canvas-demo/tree/master/src/eraser) | 快速实现橡皮擦效果
+[Magnifier](https://github.com/hamger/canvas-demo/tree/master/src/magnifier) | 快速实现放大镜效果
 
 ## Changelog
 ### 2018.8.3
