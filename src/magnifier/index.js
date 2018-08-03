@@ -1,2 +1,7 @@
 import './index.scss'
-document.write('<h1>page02</h1>')
+import Magnifier from './magnifier'
+
+new Magnifier({
+  container: document.getElementById('container'),
+  img: require('../assets/magnifier.jpg')
+})

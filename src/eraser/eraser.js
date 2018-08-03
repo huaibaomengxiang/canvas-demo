@@ -1,8 +1,8 @@
-import { strokeLine, fillArc } from '../util'
+import { strokeLine, fillArc, getLocation } from '../util'
 
 class Eraser {
   constructor (option) {
-    this.container = option.container // 容器
+    this.container = option.container // 容器 dom 元素
     this.frontImg = option.frontImg // 前面的图片地址
     this.backImg = option.backImg // 后面的图片地址
     this.radius = option.radius || 30 // 橡皮擦半径
@@ -56,7 +56,7 @@ class Eraser {
       container.addEventListener(tapstart, function (e) {
         clearTimeout(timeout)
         e.preventDefault()
-        area = getClipArea(e)
+        area = getLocation(canvas, e)
         x1 = area.x
         y1 = area.y
         fillArc(ctx, x1, y1, radius, 0, 2 * Math.PI)
@@ -91,7 +91,7 @@ class Eraser {
         function tapmoveHandler (e) {
           clearTimeout(timeout)
           e.preventDefault()
-          area = getClipArea(e)
+          area = getLocation(canvas, e)
           x2 = area.x
           y2 = area.y
           strokeLine(ctx, x1, y1, x2, y2)
@@ -100,15 +100,6 @@ class Eraser {
           y1 = y2
         }
       })
-    }
-
-    function getClipArea (e) {
-      var x = hastouch ? e.targetTouches[0].pageX : e.clientX
-      var y = hastouch ? e.targetTouches[0].pageY : e.clientY
-      return {
-        x: x - canvas.getBoundingClientRect().left,
-        y: y - canvas.getBoundingClientRect().top
-      }
     }
   }
 }
