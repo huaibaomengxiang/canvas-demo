@@ -15,7 +15,7 @@ class Eraser {
     container.style.backgroundImage = `url(${this.backImg})`
     container.style.backgroundRepeat = `no-repeat`
     container.style.backgroundPosition = `center`
-    container.style.backgroundSize = `auto 100%`
+    container.style.backgroundSize = `cover`
 
     var x1,
       y1,
@@ -27,6 +27,9 @@ class Eraser {
     container.appendChild(canvas)
     canvas.width = container.clientWidth
     canvas.height = container.clientHeight
+    // 当屏幕被伸缩时，使画布依然充满整个元素
+    canvas.style.width = '100%'
+    canvas.style.height = '100%'
     canvas.style.transition = `opacity 0.8s`
     var ctx = canvas.getContext('2d')
     var hastouch = 'ontouchstart' in window,
@@ -37,9 +40,8 @@ class Eraser {
     var img = new Image()
     img.src = this.frontImg
     img.onload = function () {
-      var w = canvas.height * (img.width / img.height)
-      // 以 canvas 的高度绘制图片，并且保持图片原始比例
-      ctx.drawImage(img, (canvas.width - w) / 2, 0, w, canvas.height)
+      // 使图片填充整个画布
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
       tapClip()
     }
 
