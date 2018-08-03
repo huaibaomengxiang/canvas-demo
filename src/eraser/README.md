@@ -1,7 +1,17 @@
+## Eraser
+快速实现橡皮擦效果
+
+## Usage
 ```js
+import kit from 'canvas-kit'
+var { Eraser } = kit
+
 new Eraser(options)
 ```
-生成一个橡皮擦效果，`options`为一个对象，接受如下配置：
+[使用案例](./index.js)
+
+## Options
+`options`为一个对象，接受如下配置：
 
 key | value | isRequest | description
 --- | --- | --- | ---

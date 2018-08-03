@@ -19,23 +19,14 @@ new Eraser({
 ```
 
 ## API
-### 构造函数
+### 构造器
+[Eraser构造器](https://github.com/hamger/canvas-demo/tree/master/src/eraser) 快速实现橡皮擦效果
 
-[Eraser构造器](./eraser.md) 快速实现橡皮擦效果
-
-#### Eraser
-```js
-new Eraser(options)
-```
-生成一个橡皮擦效果，`options`为一个对象，接受如下配置：
-
-key | value | isRequest | description
---- | --- | --- | ---
-container | Element | 是 | 规定容器，该元素需要规定宽高
-frontImg | String | 是 | 规定前面的图片地址
-backImg | String | 是 | 规定后边的图片地址
-radius | Number | 否 | 规定橡皮擦半径，默认 30（px）
+[Magnifier构造器](https://github.com/hamger/canvas-demo/tree/master/src/magnifier) 快速实现放大镜效果
 
 ## Changelog
+### 2018.8.3
+> v0.1.5 添加 Magnifier 构造器
+
 ### 2018.8.2
 > v0.1.4 添加 Eraser 构造器
