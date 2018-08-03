@@ -2,9 +2,9 @@ import { strokeLine, fillArc } from '../util'
 
 class Eraser {
   constructor (option) {
-    this.container = option.container
-    this.frontImg = option.frontImg
-    this.backImg = option.backImg
+    this.container = option.container // 容器
+    this.frontImg = option.frontImg // 前面的图片地址
+    this.backImg = option.backImg // 后面的图片地址
     this.radius = option.radius || 30 // 橡皮擦半径
     this.init()
   }
