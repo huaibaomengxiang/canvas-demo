@@ -1,5 +1,5 @@
 # canvas-demo
-使用 canvas 制作一些好玩的 demo
+使用 canvas 制作一些有趣的 demo
 
 ## Construction
 ```
@@ -15,10 +15,11 @@
         └── index.js ------------------ 页面A的js代码入口
     └── page02 ------------------------ 页面B代码
 ```
-## canvas-kit
-> 在编写某些 canvas demo 过程中，抽象出一些实用的构造器，用于快速实现一些效果
 
-详见[canvas-kit 文档地址](./output)
+## canvas-kit
+> 在编写某些 canvas demo 过程中，抽象出一些实用的方法，用于快速实现一些效果
+
+详见 [canvas-kit 文档](https://github.com/hamger/canvas-demo/tree/master/output)
 
 ## Start
 ### 安装依赖

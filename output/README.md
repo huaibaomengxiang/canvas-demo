@@ -27,6 +27,8 @@ new Eraser({
 
 ## Changelog
 ### 2018.8.3
+> v0.1.6 Eraser 构造器添加 callback 配置项和 reset 实例方法
+
 > v0.1.5 添加 Magnifier 构造器
 
 ### 2018.8.2
