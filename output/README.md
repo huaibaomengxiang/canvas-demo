@@ -20,6 +20,9 @@ new Eraser({
 
 ## API
 ### 构造函数
+
+[Eraser构造器](./eraser.md) 快速实现橡皮擦效果
+
 #### Eraser
 ```js
 new Eraser(options)
