@@ -1,7 +1,5 @@
 import './index.scss'
 import Eraser from './eraser.js'
-// import kit from '../../package/canvas-kit'
-// var { Eraser } = kit
 
 var eraser1 = new Eraser({
   container: document.getElementById('aa'),
