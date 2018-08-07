@@ -1,13 +1,13 @@
-import './index.scss';
+import './index.scss'
 
-function DotsAnimation(id,arr,cr,g,b) {
-  const c = document.getElementById(id);
-  c.width = window.innerWidth;
-  c.height = window.innerHeight;
+function DotsAnimation (id, arr, gra, cr, g, b) {
+  const c = document.getElementById(id)
+  c.width = window.innerWidth
+  c.height = window.innerHeight
   let vpx = c.width/2;
   let vpy = c.height/2;
   const ctx = c.getContext('2d');
-  const grap = 7;
+  const grap = gra;
   const speed = 0.1;
   const focalLength = 250;
   let directionFlag = false;
@@ -32,26 +32,26 @@ function DotsAnimation(id,arr,cr,g,b) {
 
   function drawText() {
     ctx.save();
-    ctx.font = "200px 微软雅黑 bold";
-    ctx.fillStyle = "#000";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
+    ctx.font = '200px 微软雅黑 bold';
+    ctx.fillStyle = '#000';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
     ctx.fillText(arr[index], c.width / 2, c.height / 2);
     ctx.restore();
   }
 
   function getImageData() {
-    if(dots.length > 0) {
-      ctx.clearRect(0,0,c.width,c.height);
+    if (dots.length > 0) {
+      ctx.clearRect(0, 0, c.width, c.height);
       drawText();
       let dotsNum = 0;
       let dotsIndex = 0;
-      const imageData = ctx.getImageData(0,0,c.width,c.height);
+      const imageData = ctx.getImageData(0, 0, c.width, c.height);
       const buffer=new Uint32Array(imageData.data.buffer)
       for (let x = 0; x < imageData.width; x += grap) {
         for (let y = 0; y < imageData.height; y += grap) {
-          if(buffer[y * imageData.width + x]) {
-            if(!dots[dotsIndex]) {
+          if (buffer[y * imageData.width + x]) {
+            if (!dots[dotsIndex]) {
               let dot = new Dot(x, y, 0, 3);
               dots.push(dot);
             } else {
@@ -70,11 +70,11 @@ function DotsAnimation(id,arr,cr,g,b) {
       dots.length = dotsNum;
     } else {
       drawText();
-      const imageData = ctx.getImageData(0,0,c.width,c.height);
+      const imageData = ctx.getImageData(0, 0, c.width, c.height);
       const buffer=new Uint32Array(imageData.data.buffer)
       for (let x = 0; x < imageData.width; x += grap) {
         for (let y = 0; y < imageData.height; y += grap) {
-          if(buffer[y * imageData.width + x]) {
+          if (buffer[y * imageData.width + x]) {
             let dot = new Dot(x, y, 0, 3);
             dots.push(dot);
           }
@@ -128,10 +128,10 @@ function DotsAnimation(id,arr,cr,g,b) {
           if(Math.abs(this.dx - this.x) < 0.1 && Math.abs(this.dy - this.y) < 0.1 && Math.abs(this.dz - this.z) < 0.1) {
             this.angle += 0.05;
             this.scale = this.scale + Math.sin(this.angle) * 0.01;
+            this.r = r * 2;
             this.x = this.dx;
             this.y = this.dy;
             this.z = this.dz;
-            this.r = r * 2;
             canRotate =true;
             thisTime = +new Date();
             if(thisTime - lastTime > 2000 ) {
@@ -244,18 +244,24 @@ function DotsAnimation(id,arr,cr,g,b) {
 
   //增加鼠标交互
   c.addEventListener('mousemove',function (e) {
-    // if(canRotate) {
-    //   lastMove = +new Date();
-    //   rotate = true;
-    //   const x = e.clientX;
-    //   const y = e.clientY;
-    //   angleX = (y - vpy) * 0.0001;
-    //   angleY = (x - vpx) * 0.0001;
-    //   console.log(timer);
-    //
-    // }
+    if(canRotate) {
+      rotate = true;
+      const x = e.clientX;
+      const y = e.clientY;
+      angleX = (y - vpy) * 0.0001;
+      angleY = (x - vpx) * 0.0001;
+
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        const nx = e.clientX;
+        const ny = e.clientY;
+        if(nx === x && ny === y) {
+          rotate =false;
+        }
+      },2000)
+    }
   })
 
 
 }
-DotsAnimation('app', ['卖好车','大前端','666'], 255, 141, 0)
+DotsAnimation('app', ['卖好车','大前端','666'], 11, 255, 141, 0)
