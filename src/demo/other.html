@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Other</title>
+</head>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  canvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #000;
+  }
+</style>
+<body>
+  <canvas id="app"></canvas>
+</body>
+</html>
+<script>
+  const c = document.getElementById('app');
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+  let vpx = c.width/2;
+  let vpy = c.height/2;
+  let zpos = 0;
+  const ctx = c.getContext('2d');
+  const focalLength = 250;
+  const grap = 7;
+  let angleX = 0;
+  let angleY = 0;
+
+
+  function drawText() {
+    ctx.save();
+    ctx.font = "200px 微软雅黑 bold";
+    ctx.fillStyle = "#000";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText('卖好车', c.width / 2, c.height / 2);
+    ctx.restore();
+  }
+
+  function getImageData() {
+    drawText();
+    const imageData = ctx.getImageData(0,0,c.width,c.height);
+    const buffer=new Uint32Array(imageData.data.buffer)
+    for (let x = 0; x < imageData.width; x += grap) {
+      for (let y = 0; y < imageData.height; y += grap) {
+        if(buffer[y * imageData.width + x]) {
+          let dot = new Dot(x, y, 0, 3);
+          dots.push(dot);
+        }
+      }
+    }
+    return dots;
+  }
+
+  function Dot(x,y,z,r) {
+    this.x = this.xpos = x;
+    this.y = this.ypos = y;
+    this.z = this.zpos = z;
+    this.r = r * 2;
+
+    this.angle=Math.random() * 180;
+    this.scale = 1;
+
+    this.paint = function () {
+      const scale = focalLength/(focalLength + this.z);
+      const xpos = this.x - vpx;
+      const ypos = this.y - vpy;
+      ctx.save();
+      ctx.beginPath();
+      ctx.fillStyle = 'rgba(255,141,0,'+scale+')';
+      ctx.scale(this.scale,this.scale)
+      ctx.arc((vpx + xpos * scale)/this.scale, (vpy + ypos * scale)/this.scale, this.r/2 * scale, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+    this.step = function () {
+      if (this.zpos > -focalLength) {
+        const scale = focalLength/(focalLength + this.zpos);
+        this.x = vpx + this.xpos * scale;
+        this.y = vpy + this.ypos * scale;
+        this.r = r * 2 * scale;
+      }
+      this.angle += 0.05;
+      this.scale = this.scale + Math.sin(this.angle) * 0.01;
+    }
+
+    this.rotateX = function () {
+      const cosx = Math.cos(angleX);
+      const sinx = Math.sin(angleX);
+      const y1 = this.ypos * cosx - this.zpos * sinx;
+      const z1 = this.zpos * cosx + this.ypos * sinx;
+      this.ypos = y1;
+      this.zpos = z1;
+    }
+
+    this.rotateY = function () {
+      const cosy = Math.cos(angleY);
+      const siny = Math.sin(angleY);
+      const x1 = this.xpos * cosy - this.zpos * siny;
+      const z1 = this.zpos * cosy + this.xpos * siny;
+      this.xpos = x1;
+      this.zpos = z1;
+    }
+
+
+  }
+
+  let dots = [];
+  function createDots() {
+    dots = getImageData();
+  }
+  function paintDots() {
+    dots.forEach(v => {
+      v.paint();
+    })
+  }
+
+  function stepDots() {
+    dots.forEach(v => {
+      // v.rotateX();
+      // v.rotateY();
+      v.step()
+    })
+  }
+
+  function rotate() {
+    dots.forEach(v => {
+      v.rotateX();
+      v.rotateY();
+    })
+  }
+
+  function sortZ () {
+    dots.sort(function (a, b) { return b.z - a.z })
+  }
+  createDots();
+  console.log(dots)
+  function animation() {
+    ctx.clearRect(0,0,c.width,c.height)
+    paintDots();
+    stepDots();
+    // sortZ();
+    requestAnimationFrame(animation)
+  }
+  animation()
+  window.addEventListener('keydown',function (e) {
+    if (e.keyCode == 38) {
+      dots.forEach(v => {
+        v.zpos += 5;
+      })
+    };
+    if (e.keyCode == 40) {
+      dots.forEach(v => {
+        v.zpos -= 5;
+      })
+    };
+  })
+
+  c.addEventListener('mousemove',function (e) {
+    const x = e.clientX;
+    const y = e.clientY;
+    angleX = (y - vpy) * 0.0001;
+    angleY = (x - vpx) * 0.0001;
+    // ctx.clearRect(0,0,c.width,c.height);
+    // paintDots();
+    // rotate();
+    // sortZ();
+  })
+
+</script>
