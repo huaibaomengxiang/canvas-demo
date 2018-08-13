@@ -16,8 +16,9 @@ export function fillArc (ctx, x, y, r, sAngle, eAngle, counterclockwise) {
 }
 
 // 获取相对于容器的位置
-export function getLocation (container, e) {
+export function getLocation (container, event) {
   var hastouch = 'ontouchstart' in window
+  var e = event || window.event
   var x = hastouch ? e.targetTouches[0].pageX : e.clientX
   var y = hastouch ? e.targetTouches[0].pageY : e.clientY
   return {

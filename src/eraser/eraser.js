@@ -55,7 +55,7 @@ class Eraser {
       timeout,
       totimes = 100,
       distance = 30
-    var area
+    var position
     var x2, y2
     ctx.lineCap = 'round' // 设置线条两端为圆弧
     ctx.lineJoin = 'round' // 设置线条转折为圆弧
@@ -67,18 +67,18 @@ class Eraser {
       isMouseDown = true
       clearTimeout(timeout)
       e.preventDefault()
-      area = getLocation(canvas, e)
-      x1 = area.x
-      y1 = area.y
+      position = getLocation(canvas, e)
+      x1 = position.x
+      y1 = position.y
       fillArc(ctx, x1, y1, radius, 0, 2 * Math.PI)
     })
     container.addEventListener(tapmove, (e) => {
       if (!isMouseDown) return
       clearTimeout(timeout)
       e.preventDefault()
-      area = getLocation(canvas, e)
-      x2 = area.x
-      y2 = area.y
+      position = getLocation(canvas, e)
+      x2 = position.x
+      y2 = position.y
       strokeLine(ctx, x1, y1, x2, y2)
       // 重置开始距离
       x1 = x2
