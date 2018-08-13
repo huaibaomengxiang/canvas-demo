@@ -1,5 +1,5 @@
 # canvas-demo
-使用 canvas 制作一些有趣的 demo
+兴趣使然，那些关于 canvas 的故事
 
 ## Construction
 ```
