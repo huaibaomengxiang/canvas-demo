@@ -17,7 +17,7 @@
 ```
 
 ## canvas-kit
-> 在编写某些 canvas demo 过程中，抽象出一些实用的方法，用于快速实现一些效果
+> 在编写 canvas demo 过程中，抽象出一些实用的方法，用于方便开发或者快速实现一些效果
 
 详见 [canvas-kit 文档](https://github.com/hamger/canvas-demo/tree/master/output)
 
