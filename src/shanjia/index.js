@@ -261,8 +261,6 @@ function DotsAnimation (options) {
 
 DotsAnimation({
   id: 'app',
-  width: 1000,
-  height: 500,
   arr: ['卖好车', '大前端', '666'],
   gap: 11,
   cr: 255,
