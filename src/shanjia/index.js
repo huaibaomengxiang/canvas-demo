@@ -1,3 +1,4 @@
+/* eslint-disable */ 
 import './index.scss'
 
 function DotsAnimation (options) {
