@@ -1,7 +1,7 @@
 {
   "name": "canvas-kit",
   "description": "some useful kit for canvas",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "author": "hamger <2313303800@qq.com>",
   "license": "MIT",
   "scripts": {
