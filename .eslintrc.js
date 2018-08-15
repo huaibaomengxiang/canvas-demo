@@ -3,6 +3,10 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint'
   },
+  globals:{
+    BMap:false,
+    $:false
+  },
   env: {
     browser: true,
   },
