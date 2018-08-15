@@ -214,7 +214,7 @@ var gameMonitor = {
 
     _this.genorateFood()
 
-    for (i = _this.foodList.length - 1; i >= 0; i--) {
+    for (let i = _this.foodList.length - 1; i >= 0; i--) {
       var f = _this.foodList[i]
       if (f) {
         f.paint(ctx)
