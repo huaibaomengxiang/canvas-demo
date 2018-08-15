@@ -19,6 +19,9 @@ new Eraser({
 ```
 
 ## API
+方法 | 描述
+--- | ---
+[getLocation](https://github.com/hamger/canvas-demo/tree/master/src/util) | 获得光标相对于 Element 元素的坐标
 
 构造器 | 描述
 --- | ---
@@ -26,6 +29,9 @@ new Eraser({
 [Magnifier](https://github.com/hamger/canvas-demo/tree/master/src/magnifier) | 快速实现放大镜效果
 
 ## Changelog
+### 2018.8.15
+> v0.1.7 添加 getLocation 方法
+
 ### 2018.8.3
 > v0.1.6 Eraser 构造器添加 callback 配置项和 reset 实例方法
 

@@ -5,8 +5,7 @@ Magnifier 构造器用于快速实现放大镜效果
 ## Usage
 
 ```js
-import kit from "canvas-kit";
-var { Magnifier } = kit;
+import { Magnifier } from "canvas-kit";
 
 new Magnifier(options);
 ```

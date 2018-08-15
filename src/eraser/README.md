@@ -5,8 +5,7 @@ Eraser 构造器用于快速实现橡皮擦效果
 ## Usage
 
 ```js
-import kit from "canvas-kit";
-var { Eraser } = kit;
+import { Eraser }  from "canvas-kit";
 
 new Eraser(options);
 ```
