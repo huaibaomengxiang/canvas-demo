@@ -47,7 +47,6 @@ function DotsAnimation (options) {
     if (dots.length > 0) {
       dots = [];
       ctx.clearRect(0, 0, c.width, c.height);
-
     }
     drawText();
     const imageData = ctx.getImageData(0, 0, c.width, c.height);
