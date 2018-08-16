@@ -8,7 +8,7 @@ class Net {
     this.dotScope = option.dotScope || 6000 // 两点之间连线的最大长度
     this.gatherSpeed = option.gatherSpeed || 0.03 // 向鼠标聚集的速度
     this.gatherScope = option.gatherScope || 20000 // 鼠标吸引范围的半径
-    this.a = option.a || 1 // 点的移动速度
+    this.dotSpeed = option.dotSpeed || 1 // 点的移动速度
     this.init()
   }
 
@@ -106,8 +106,8 @@ class Net {
     for (var i = 0; i < this.dotCount; i++) {
       var x = Math.random() * this.canvas.width
       var y = Math.random() * this.canvas.height
-      var xa = (Math.random() * 2 - 1) * this.a
-      var ya = (Math.random() * 2 - 1) * this.a
+      var xa = (Math.random() * 2 - 1) * this.dotSpeed
+      var ya = (Math.random() * 2 - 1) * this.dotSpeed
       this.dots.push({
         x: x,
         y: y,
