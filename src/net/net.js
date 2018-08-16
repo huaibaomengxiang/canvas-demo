@@ -8,6 +8,7 @@ class Net {
     this.dotScope = option.dotScope || 6000 // 两点之间连线的最大长度
     this.gatherSpeed = option.gatherSpeed || 0.03 // 向鼠标聚集的速度
     this.gatherScope = option.gatherScope || 20000 // 鼠标吸引范围的半径
+    this.a = option.a || 1 // 点的移动速度
     this.init()
   }
 
@@ -47,7 +48,7 @@ class Net {
         2 * this.dotSize,
         2 * this.dotSize
       )
-      // 循环比对粒子间的距离
+      // 循环比对该粒子与所有粒子间的距离，如果距离在范围内则绘制连线
       for (var i = 0; i < ndots.length; i++) {
         var d2 = ndots[i]
         if (dot === d2 || d2.x === null || d2.y === null) continue
@@ -75,7 +76,7 @@ class Net {
           ctx.stroke()
         }
       }
-      // 将已经计算过的粒子从数组中删除
+      // 将已经计算过的粒子从点数组中删除，避免重复绘制连线
       ndots.splice(ndots.indexOf(dot), 1)
     })
     window.requestAnimationFrame(this.animate.bind(this))
@@ -105,8 +106,8 @@ class Net {
     for (var i = 0; i < this.dotCount; i++) {
       var x = Math.random() * this.canvas.width
       var y = Math.random() * this.canvas.height
-      var xa = Math.random() * 2 - 1
-      var ya = Math.random() * 2 - 1
+      var xa = (Math.random() * 2 - 1) * this.a
+      var ya = (Math.random() * 2 - 1) * this.a
       this.dots.push({
         x: x,
         y: y,
