@@ -180,9 +180,11 @@ function DotImg(options) {
     requestAnimationFrame(animate);
   }
 
+
+
   drawImg(img, dots);
   dots.sort(function(a, b) {
-    return a.ex - b.ex;
+    return a.dx - b.dx;
   });
   animate();
 
