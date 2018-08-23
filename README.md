@@ -31,7 +31,7 @@ npm install
 ```bash
 npm run dev
 ```
-访问`http://localhost:8080/page01.html`可以看到页面A的内容，同理可访问其他页面的内容。
+访问`http://localhost:8080/page01`可以看到页面A的内容，同理可访问其他页面的内容。
 
 
 ### 打包代码
