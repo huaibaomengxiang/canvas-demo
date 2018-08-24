@@ -1,9 +1,10 @@
 import Element from './element'
 import TWEEN from '@tweenjs/tween.js'
-function animate (time) {
-  requestAnimationFrame(animate)
-  TWEEN.update(time)
-}
+// function animate (time) {
+//   requestAnimationFrame(animate)
+//   TWEEN.update(time)
+//   // this.clear()
+// }
 
 class Canvas {
   constructor (opt) {
@@ -54,11 +55,16 @@ class Canvas {
       //   })
       //   .start()
 
-      // // Setup the animation loop.
-      // this.clear()
-      this.children.forEach(child => {
-        child.main.draw(this.ctx)
-      })
+      /* eslint-disable */
+      var animate = (time) => {
+        // console.log(34)
+        this.clear()
+        this.children.forEach(child => {
+          child.main.draw(this.ctx)
+        })
+        requestAnimationFrame(animate)
+        TWEEN.update(time)
+      }
       requestAnimationFrame(animate)
     } else {
       this.clear()
