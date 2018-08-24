@@ -1,3 +1,10 @@
+import Element from './element'
+import TWEEN from '@tweenjs/tween.js'
+function animate (time) {
+  requestAnimationFrame(animate)
+  TWEEN.update(time)
+}
+
 class Canvas {
   constructor (opt) {
     this.container = opt.container
@@ -19,14 +26,46 @@ class Canvas {
     this.canvas.width = this.container.clientWidth
     this.canvas.height = this.container.clientHeight
   }
-  addChild (child) {
-    this.children.push(child)
+  addElement (element) {
+    if (element instanceof Element) {
+      this.children.push(element)
+    } else { throw Error('Function addElement only accept the instance of Element.') }
+  }
+  removeElement (element) {
+    this.children.some((item, index) => {
+      if (item.id === element.id) {
+        this.children.splice(index, 1)
+        return true
+      }
+    })
   }
   draw () {
-    this.clear()
-    this.children.forEach(child => {
-      child.draw(this.ctx)
-    })
+    if (
+      this.children.some(function (item) {
+        return item.isMotion === true
+      })
+    ) {
+      // new TWEEN.Tween({ x: 0, y: 0 })
+      //   .to({ x: 300, y: 200 }, 1000)
+      //   .easing(TWEEN.Easing.Quadratic.Out)
+      //   .onUpdate(function (obj) {
+      //     ctx.clearRect(0, 0, canvas.width, canvas.height)
+      //     ctx.fillRect(obj.x, obj.y, 100, 100)
+      //   })
+      //   .start()
+
+      // // Setup the animation loop.
+      // this.clear()
+      this.children.forEach(child => {
+        child.main.draw(this.ctx)
+      })
+      requestAnimationFrame(animate)
+    } else {
+      this.clear()
+      this.children.forEach(child => {
+        child.main.draw(this.ctx)
+      })
+    }
   }
   clear () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
