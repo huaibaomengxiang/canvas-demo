@@ -1,7 +1,7 @@
 /* eslint-disable */
 import './index.scss';
 
-function DotImg(options) {
+function DotImg (options) {
   const { id, img, width, height, radius, speed, gapX, gapY } = options;
   let c = document.getElementById(id);
   c.width = width || window.innerWidth;
@@ -30,7 +30,7 @@ function DotImg(options) {
     vpy = c.height / 2;
   }
 
-  function drawImg(img,dots) {
+  function drawImg (img, dots) {
     let image = new Image();
     image.onload = () => {
       let imgX = vpx - image.width / 2;
@@ -48,7 +48,7 @@ function DotImg(options) {
             let a = imageData.data[i + 3]
             let color = `rgba(${r}, ${g}, ${b}, ${a})`;
             let rx = x + Math.random() * 20;
-            let ry = y - Math.random() * 40 -20;
+            let ry = y - Math.random() * 40 - 20;
             let vx = -Math.random() * 200 + 400;
             let vy = ry < imgY + image.height / 2 ? Math.random() * 300 : -Math.random() * 300;
             let dot = new Dot(rx + imgX, ry + imgY, x + imgX, y + imgY, vx, vy, color);
@@ -58,10 +58,9 @@ function DotImg(options) {
       }
     }
     image.src = img;
-
   }
 
-  function Dot(x, y, dx, dy, vx, vy, color) {
+  function Dot (x, y, dx, dy, vx, vy, color) {
     this.x = x;
     this.y = y;
     this.dx = dx;
@@ -113,9 +112,8 @@ function DotImg(options) {
         this.y = this.dy;
       }
     }
-
     this.joinMouse = function () {
-      if (!mouseX) {x
+      if (!mouseX) {
         this.goback();
         return;
       }
@@ -139,7 +137,6 @@ function DotImg(options) {
         this.goback()
       }
     }
-    
     this.goback = function () {
       if (this.recordX) {
         this.stop = false;
@@ -151,10 +148,9 @@ function DotImg(options) {
         this.recordY = null;
       }
     }
-
   }
 
-  function creatDots() {
+  function creatDots () {
     if (particleArr.length < dots.length) {
       let end = index + num;
       if (index + num > dots.length - 1) {
@@ -165,7 +161,7 @@ function DotImg(options) {
     }
   }
 
-  function paintDots() {
+  function paintDots () {
     particleArr.forEach(v => {
       v.paint();
       v.step();
@@ -173,17 +169,14 @@ function DotImg(options) {
     })
   }
 
-  function animate() {
+  function animate () {
     ctx.clearRect(0, 0, c.width, c.height);
     creatDots();
     paintDots();
     requestAnimationFrame(animate);
   }
-
-
-
   drawImg(img, dots);
-  dots.sort(function(a, b) {
+  dots.sort(function (a, b) {
     return a.dx - b.dx;
   });
   animate();
