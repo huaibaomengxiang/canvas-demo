@@ -9,6 +9,9 @@ class Net {
     this.gatherSpeed = option.gatherSpeed || 0.03 // 向鼠标聚集的速度
     this.gatherScope = option.gatherScope || 20000 // 鼠标吸引范围的半径
     this.dotSpeed = option.dotSpeed || 1 // 点的移动速度
+    this.bgColor = option.bgColor || '#fff'
+    this.dotColor = option.dotColor || '#000'
+    this.lineColor = option.lineColor || [0, 0, 0]
     this.init()
   }
 
@@ -17,6 +20,7 @@ class Net {
     var canvas = document.createElement('canvas')
     this.canvas = canvas
     container.appendChild(canvas)
+    canvas.style.backgroundColor = this.bgColor
     this.resize()
     window.onresize = this.resize
     var ctx = canvas.getContext('2d')
@@ -42,6 +46,7 @@ class Net {
       dot.xa *= dot.x > canvas.width || dot.x < 0 ? -1 : 1
       dot.ya *= dot.y > canvas.height || dot.y < 0 ? -1 : 1
       // 绘制点
+      ctx.fillStyle = this.dotColor
       ctx.fillRect(
         dot.x - this.dotSize,
         dot.y - this.dotSize,
@@ -70,7 +75,7 @@ class Net {
           // 画线
           ctx.beginPath()
           ctx.lineWidth = ratio / 2
-          ctx.strokeStyle = 'rgba(0,0,0,' + (ratio + 0.2) + ')'
+          ctx.strokeStyle = `rgba(${this.lineColor[0]}, ${this.lineColor[1]}, ${this.lineColor[2]}, ${ratio + 0.2})`
           ctx.moveTo(dot.x, dot.y)
           ctx.lineTo(d2.x, d2.y)
           ctx.stroke()
