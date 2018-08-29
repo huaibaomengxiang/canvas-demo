@@ -1,11 +1,5 @@
 import Element from './element'
 import TWEEN from '@tweenjs/tween.js'
-// function animate (time) {
-//   requestAnimationFrame(animate)
-//   TWEEN.update(time)
-//   // this.clear()
-// }
-
 class Canvas {
   constructor (opt) {
     this.container = opt.container
@@ -30,7 +24,9 @@ class Canvas {
   addElement (element) {
     if (element instanceof Element) {
       this.children.push(element)
-    } else { throw Error('Function addElement only accept the instance of Element.') }
+    } else {
+      throw Error('Function addElement only accept the instance of Element.')
+    }
   }
   removeElement (element) {
     this.children.some((item, index) => {
@@ -46,26 +42,7 @@ class Canvas {
         return item.isMotion === true
       })
     ) {
-      // new TWEEN.Tween({ x: 0, y: 0 })
-      //   .to({ x: 300, y: 200 }, 1000)
-      //   .easing(TWEEN.Easing.Quadratic.Out)
-      //   .onUpdate(function (obj) {
-      //     ctx.clearRect(0, 0, canvas.width, canvas.height)
-      //     ctx.fillRect(obj.x, obj.y, 100, 100)
-      //   })
-      //   .start()
-
-      /* eslint-disable */
-      var animate = (time) => {
-        // console.log(34)
-        this.clear()
-        this.children.forEach(child => {
-          child.main.draw(this.ctx)
-        })
-        requestAnimationFrame(animate)
-        TWEEN.update(time)
-      }
-      requestAnimationFrame(animate)
+      requestAnimationFrame(this.animate.bind(this))
     } else {
       this.clear()
       this.children.forEach(child => {
@@ -75,6 +52,14 @@ class Canvas {
   }
   clear () {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+  }
+  animate (time) {
+    this.clear()
+    this.children.forEach(child => {
+      child.main.draw(this.ctx)
+    })
+    requestAnimationFrame(this.animate.bind(this))
+    TWEEN.update(time)
   }
 }
 export default Canvas

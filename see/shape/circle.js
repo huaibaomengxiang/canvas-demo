@@ -16,6 +16,7 @@ export default class Circle {
   }
   move () {
     let attrs = this.attrs
+    console.log(attrs)
     new TWEEN.Tween(attrs.from)
       .to(attrs.to, attrs.duration)
       .easing(getVal(TWEEN.Easing, attrs.easing))
