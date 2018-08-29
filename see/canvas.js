@@ -14,7 +14,7 @@ class Canvas {
     canvas.style.width = '100%'
     canvas.style.height = '100%'
     this.resize()
-    window.onresize = this.resize
+    window.onresize = this.resize.bind(this)
     this.ctx = canvas.getContext('2d')
   }
   resize () {
@@ -46,7 +46,7 @@ class Canvas {
     } else {
       this.clear()
       this.children.forEach(child => {
-        child.main.draw(this.ctx)
+        child.draw(this.ctx)
       })
     }
   }
@@ -56,7 +56,7 @@ class Canvas {
   animate (time) {
     this.clear()
     this.children.forEach(child => {
-      child.main.draw(this.ctx)
+      child.draw(this.ctx)
     })
     requestAnimationFrame(this.animate.bind(this))
     TWEEN.update(time)

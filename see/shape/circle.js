@@ -1,9 +1,8 @@
 import TWEEN from '@tweenjs/tween.js'
+import Element from '../element'
+import { getVal } from '../utils'
 
-function getVal (obj, key) {
-  return key.split('.').reduce((obj, name) => obj[name], obj)
-}
-export default class Circle {
+export default class Circle extends Element {
   constructor (
     opt = {
       from: {},
@@ -11,12 +10,12 @@ export default class Circle {
       easing: 'Quadratic.Out'
     }
   ) {
+    super(opt)
     this.attrs = Object.assign(opt, opt.from)
     if (this.attrs.to) this.move()
   }
   move () {
     let attrs = this.attrs
-    console.log(attrs)
     new TWEEN.Tween(attrs.from)
       .to(attrs.to, attrs.duration)
       .easing(getVal(TWEEN.Easing, attrs.easing))

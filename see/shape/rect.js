@@ -1,5 +1,7 @@
-export default class Rect {
+import Element from '../element'
+export default class Rect extends Element {
   constructor (opt) {
+    super(opt)
     this.x = opt.x
     this.y = opt.y
     this.w = opt.w
