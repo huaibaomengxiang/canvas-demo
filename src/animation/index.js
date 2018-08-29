@@ -13,7 +13,7 @@ var element = new Circle({
     y: 300
   },
   duration: 1000,
-  easing: 'Quadratic.Out'
+  easing: 'Linear.None'
 })
 canvas.addElement(element)
 
@@ -23,15 +23,15 @@ canvas.addElement(
     y: 600,
     fill: 'pink',
     from: {
-      w: 20,
-      h: 20
+      w: 50,
+      h: 50
     },
     to: {
       w: 100,
       h: 100
     },
     duration: 4000,
-    easing: 'Quadratic.Out'
+    easing: 'Elastic.InOut'
   })
 )
 

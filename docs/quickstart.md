@@ -1,3 +1,5 @@
+> 使用以下代码创建一个 canvas 画布，并在画布上画一个圆形
+
 ```js
 import { Canvas, Circle } from "canvas-kit";
 
