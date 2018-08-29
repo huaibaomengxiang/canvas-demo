@@ -8,6 +8,10 @@ class Net {
     this.dotScope = option.dotScope || 6000 // 两点之间连线的最大长度
     this.gatherSpeed = option.gatherSpeed || 0.03 // 向鼠标聚集的速度
     this.gatherScope = option.gatherScope || 20000 // 鼠标吸引范围的半径
+    this.dotSpeed = option.dotSpeed || 1 // 点的移动速度
+    this.bgColor = option.bgColor || '#fff'
+    this.dotColor = option.dotColor || '#000'
+    this.lineColor = option.lineColor || [0, 0, 0]
     this.init()
   }
 
@@ -16,6 +20,7 @@ class Net {
     var canvas = document.createElement('canvas')
     this.canvas = canvas
     container.appendChild(canvas)
+    canvas.style.backgroundColor = this.bgColor
     this.resize()
     window.onresize = this.resize
     var ctx = canvas.getContext('2d')
@@ -41,13 +46,14 @@ class Net {
       dot.xa *= dot.x > canvas.width || dot.x < 0 ? -1 : 1
       dot.ya *= dot.y > canvas.height || dot.y < 0 ? -1 : 1
       // 绘制点
+      ctx.fillStyle = this.dotColor
       ctx.fillRect(
         dot.x - this.dotSize,
         dot.y - this.dotSize,
         2 * this.dotSize,
         2 * this.dotSize
       )
-      // 循环比对粒子间的距离
+      // 循环比对该粒子与所有粒子间的距离，如果距离在范围内则绘制连线
       for (var i = 0; i < ndots.length; i++) {
         var d2 = ndots[i]
         if (dot === d2 || d2.x === null || d2.y === null) continue
@@ -69,13 +75,13 @@ class Net {
           // 画线
           ctx.beginPath()
           ctx.lineWidth = ratio / 2
-          ctx.strokeStyle = 'rgba(0,0,0,' + (ratio + 0.2) + ')'
+          ctx.strokeStyle = `rgba(${this.lineColor[0]}, ${this.lineColor[1]}, ${this.lineColor[2]}, ${ratio + 0.2})`
           ctx.moveTo(dot.x, dot.y)
           ctx.lineTo(d2.x, d2.y)
           ctx.stroke()
         }
       }
-      // 将已经计算过的粒子从数组中删除
+      // 将已经计算过的粒子从点数组中删除，避免重复绘制连线
       ndots.splice(ndots.indexOf(dot), 1)
     })
     window.requestAnimationFrame(this.animate.bind(this))
@@ -105,8 +111,8 @@ class Net {
     for (var i = 0; i < this.dotCount; i++) {
       var x = Math.random() * this.canvas.width
       var y = Math.random() * this.canvas.height
-      var xa = Math.random() * 2 - 1
-      var ya = Math.random() * 2 - 1
+      var xa = (Math.random() * 2 - 1) * this.dotSpeed
+      var ya = (Math.random() * 2 - 1) * this.dotSpeed
       this.dots.push({
         x: x,
         y: y,

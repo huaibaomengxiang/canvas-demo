@@ -13,7 +13,8 @@ var webpackConfig = {
   resolve: {
     extensions: ['.jsx', '.json', '.js'],
     alias: {
-      '@': path.resolve(__dirname, '../src')
+      '@': path.resolve(__dirname, '../src'),
+      '#': path.resolve(__dirname, '../kit')
     }
   },
   module: {
@@ -21,7 +22,7 @@ var webpackConfig = {
       {
         test: /.js$/,
         loaders: ['babel-loader', 'eslint-loader'],
-        include: [path.resolve(__dirname, '../src')]
+        include: [path.resolve(__dirname, '../src'), path.resolve(__dirname, '../see')]
       },
       {
         test: /.s[c|a]ss$/,
@@ -64,7 +65,7 @@ var pages = Object.keys(htmls)
 pages.forEach(filename => {
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
-      filename: `${filename}.html`,
+      filename: `${filename}/index.html`,
       template: htmls[filename],
       inject: true,
       chunks: [filename]

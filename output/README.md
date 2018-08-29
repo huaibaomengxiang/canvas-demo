@@ -27,8 +27,12 @@ new Eraser({
 --- | ---
 [Eraser](https://github.com/hamger/canvas-demo/tree/master/src/eraser) | 快速实现橡皮擦效果
 [Magnifier](https://github.com/hamger/canvas-demo/tree/master/src/magnifier) | 快速实现放大镜效果
+[Net](https://github.com/hamger/canvas-demo/tree/master/src/net) | 快速实现网状粒子云效果
 
 ## Changelog
+### 2018.8.15
+> v0.1.8 添加 Net 构造器
+
 ### 2018.8.15
 > v0.1.7 添加 getLocation 方法
 
