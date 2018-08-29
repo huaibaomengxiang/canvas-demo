@@ -1,5 +1,6 @@
 import Element from './element'
 import TWEEN from '@tweenjs/tween.js'
+import {arrSort} from './utils'
 class Canvas {
   constructor (opt) {
     this.container = opt.container
@@ -45,7 +46,7 @@ class Canvas {
       requestAnimationFrame(this.animate.bind(this))
     } else {
       this.clear()
-      this.children.forEach(child => {
+      arrSort(this.children, 'zIndex').forEach(child => {
         child.draw(this.ctx)
       })
     }
@@ -55,7 +56,7 @@ class Canvas {
   }
   animate (time) {
     this.clear()
-    this.children.forEach(child => {
+    arrSort(this.children, 'zIndex').forEach(child => {
       child.draw(this.ctx)
     })
     requestAnimationFrame(this.animate.bind(this))

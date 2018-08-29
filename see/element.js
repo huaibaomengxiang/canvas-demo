@@ -4,5 +4,6 @@ export default class Element {
     this.id = id++
     if (opts.to) this.isMotion = true
     else this.isMotion = false
+    this.zIndex = opts.zIndex || 0
   }
 }

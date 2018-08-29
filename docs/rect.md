@@ -13,6 +13,7 @@ var element = new Rect(options);
 | x             | Number | 规定矩形 x 坐标 | --      |
 | y             | Number | 规定矩形 y 坐标 | --      |
 | fill / stroke | String | 规定颜色        | `#000`  |
+| zIndex        | Number | 规定前后顺序    | `0`     |
 
 > 如果使用动画需要添加如下配置
 

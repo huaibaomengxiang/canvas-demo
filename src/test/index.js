@@ -9,8 +9,17 @@ var element = new Circle({
   x: 100,
   fill: '#999'
 })
-console.log(element instanceof Element)
 canvas.addElement(element)
+console.log(element instanceof Element)
+
+var element4 = new Circle({
+  zIndex: -2,
+  r: 50,
+  y: 150,
+  x: 150,
+  fill: '#222'
+})
+canvas.addElement(element4)
 
 var element2 = new Rect({
   x: 200,
@@ -34,7 +43,7 @@ canvas.addElement(element3)
 
 canvas.draw()
 
-setTimeout(() => {
-  canvas.removeElement(element2)
-  canvas.draw()
-}, 2000)
+// setTimeout(() => {
+//   canvas.removeElement(element2)
+//   canvas.draw()
+// }, 2000)
