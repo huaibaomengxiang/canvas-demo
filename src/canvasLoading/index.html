@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <script type="text/javascript" src="./index.js"></script>
+
+</head>
+<body>
+    <div id="demo" style="width: 200px; height: 200px;margin:60px auto"></div>
+   <button class="done" style="width:100px;margin:0 auto;display:block;">到头</button>
+</body>
+<script>
+    
+    var loading = new Vshow.waveLoading('#demo', {
+
+// [font style][font weight][font size][font family]
+// 文本样式，同css一样，必须包含 [font size] 和 [font family]
+font: 'normal 900 16px Arial',
+
+smallFont: 'normal 900 14px Arial',
+
+// 对于不需要自适应的，应该设置为 false，
+// 减少计算，提高性能
+resize: false
+});
+
+loading
+.onProgress(function (progress) {
+
+    // 当进度大于等于 60 时，设置进度文本颜色为白色。
+    if (progress >= 60) {
+        loading.setOptions({
+            color: '#fff'
+        });
+    }
+
+    // 返回字符串，文本都应用为 font 样式，不应用 smallFont 相关样式。
+    return '加载中...' + Math.ceil(progress) + '%';
+
+    // 如果返回对象，text 应用为 font 样式，
+    // smallText 应用为 smallFont，smallFontOffsetTop 样式。
+    // return {
+    //     text: '加载中...' + Math.ceil(progress),
+    //     smallText: '%'
+    // }
+});
+
+// 调用 `done()` 方法来完成加载。
+document.querySelector('.done').onclick = function () {
+loading.done();
+};
+</script>
+</html>
