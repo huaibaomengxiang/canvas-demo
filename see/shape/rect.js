@@ -1,22 +1,38 @@
+import TWEEN from '@tweenjs/tween.js'
 import Element from '../element'
+import { getVal } from '../utils'
+
 export default class Rect extends Element {
-  constructor (opt) {
+  constructor (
+    opt = {
+      from: {},
+      duration: 1000,
+      easing: 'Quadratic.Out'
+    }
+  ) {
     super(opt)
-    this.x = opt.x
-    this.y = opt.y
-    this.w = opt.w
-    this.h = opt.h
-    this.fill = opt.fill
-    if (!this.fill) this.stroke = opt.stroke
+    this.attrs = Object.assign(opt, opt.from)
+    if (this.attrs.to) this.move()
+  }
+  move () {
+    let attrs = this.attrs
+    new TWEEN.Tween(attrs.from)
+      .to(attrs.to, attrs.duration)
+      .easing(getVal(TWEEN.Easing, attrs.easing))
+      .onUpdate(cur => {
+        this.attrs = Object.assign(attrs, cur)
+      })
+      .start()
   }
   draw (ctx) {
+    let attrs = this.attrs
     ctx.save()
-    if (this.stroke) {
-      ctx.strokeStyle = this.stroke
-      ctx.strokeRect(this.x, this.y, this.w, this.h)
+    if (attrs.stroke) {
+      ctx.strokeStyle = attrs.stroke
+      ctx.strokeRect(attrs.x, attrs.y, attrs.w, attrs.h)
     } else {
-      ctx.fillStyle = this.fill || '#000'
-      ctx.fillRect(this.x, this.y, this.w, this.h)
+      ctx.fillStyle = attrs.fill || '#000'
+      ctx.fillRect(attrs.x, attrs.y, attrs.w, attrs.h)
     }
     ctx.restore()
   }
