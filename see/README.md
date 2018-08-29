@@ -22,6 +22,9 @@ canvas.addChild(
 canvas.draw();
 ```
 
+## Document
+[文档地址](https://hamger.github.io/canvas-demo/#/)
+
 ## Changelog
 
 ### 2018.8.24
