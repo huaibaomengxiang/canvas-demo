@@ -7,7 +7,7 @@ var webpackConfig = {
   entry: utils.getEntry('src/**/index.js', /^(util)$/),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name]/[name].js',
+    filename: '[name]/index.js',
     publicPath: '../'
   },
   resolve: {
@@ -62,7 +62,7 @@ var pages = Object.keys(htmls)
 pages.forEach(filename => {
   webpackConfig.plugins.push(
     new HtmlWebpackPlugin({
-      filename: `${filename}/${filename}.html`,
+      filename: `${filename}/index.html`,
       template: htmls[filename],
       inject: true,
       chunks: [filename]

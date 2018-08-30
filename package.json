@@ -1,7 +1,7 @@
 {
   "name": "canvas-kit",
   "description": "some useful kit for canvas",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "author": "hamger <2313303800@qq.com>",
   "license": "MIT",
   "scripts": {
@@ -55,5 +55,9 @@
     "url-loader": "^1.0.1",
     "webpack": "3.6.0",
     "webpack-dev-server": "2.11.1"
+  },
+  "dependencies": {
+    "@tweenjs/tween.js": "^17.2.0",
+    "pixi.js": "^4.8.1"
   }
 }
