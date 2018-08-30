@@ -1,6 +1,6 @@
 # see
 
-canvas 可视化开发基础框架
+canvas 绘图基础框架
 
 ## Usage
 

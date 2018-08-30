@@ -3,6 +3,6 @@
 * API
   * [Canvas](/canvas.md)
   * Shape
-    * [Circle](/circle.md)
-    * [Rect](/rect.md)
+    * [Circle](/shape/circle.md)
+    * [Rect](/shape/rect.md)
   
