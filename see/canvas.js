@@ -66,5 +66,8 @@ class Canvas {
     })
     TWEEN.update(time)
   }
+  animate2 (func) {
+    requestAnimationFrame(func)
+  }
 }
 export default Canvas
