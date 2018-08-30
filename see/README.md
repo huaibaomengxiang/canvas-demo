@@ -1,6 +1,6 @@
-## see
+# see
 
-轻巧的 canvas 可视化开发框架
+canvas 可视化开发基础框架
 
 ## Usage
 
@@ -26,6 +26,10 @@ canvas.draw();
 [文档地址](https://hamger.github.io/canvas-demo/#/)
 
 ## Changelog
+
+### 2018.8.29
+
+> v0.1.1 添加 zIndex 配置
 
 ### 2018.8.24
 
