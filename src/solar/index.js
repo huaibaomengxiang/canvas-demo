@@ -56,22 +56,32 @@ function circle (options) {
     this.time = Math.random() * cycle;
 
     this.cacheCanvas = document.createElement('canvas');
+    this.cacheCtx = this.cacheCanvas.getContext('2d');
     this.cacheCanvas.width = 2 * this.r;
     this.cacheCanvas.height = 2 * this.r;
 
-    this.paint = function () {
-      ctx.save();
-      ctx.beginPath()
-      this.color = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+    this.cache = function () {
+      this.cacheCtx.save();
+      this.cacheCtx.beginPath()
+      this.color = this.cacheCtx.createRadialGradient(this.r, this.r, 0, this.r, this.r, this.r);
       this.color.addColorStop(0, startColor);
       this.color.addColorStop(1, endColor);
-      ctx.fillStyle = this.color;
+      this.cacheCtx.fillStyle = this.color;
+      this.cacheCtx.arc(this.r, this.r, this.r, 0, Math.PI * 2);
+      this.cacheCtx.fill();
+      this.cacheCtx.restore();
+    }
+
+    this.cache();
+
+    this.paint = function () {
+      ctx.save();
       ctx.translate(vpx, vpy);
       ctx.rotate(this.time * (360 / this.cycle) * Math.PI / 180);
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.drawImage(this.cacheCanvas, this.x - this.r, this.y - this.r)
       ctx.restore();
     }
+
     this.move = function () {
       this.time += 1;
     }
@@ -82,7 +92,6 @@ function circle (options) {
       let star = new Star(0, 100 + (50 * i), 10 + (i * 2), v.cycle, v.startColor, v.endColor);
       arr.push(star)
     })
-    console.log(arr[0])
   }
 
   function paintStar() {
