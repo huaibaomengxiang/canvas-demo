@@ -19,8 +19,8 @@ class Canvas {
     this.ctx = canvas.getContext('2d')
   }
   resize () {
-    this.canvas.width = this.container.clientWidth
-    this.canvas.height = this.container.clientHeight
+    this.width = this.canvas.width = this.container.clientWidth
+    this.height = this.canvas.height = this.container.clientHeight
   }
   addElement (element) {
     if (element instanceof Element) {
@@ -30,12 +30,16 @@ class Canvas {
     }
   }
   removeElement (element) {
-    this.children.some((item, index) => {
-      if (item.id === element.id) {
-        this.children.splice(index, 1)
-        return true
-      }
-    })
+    if (element) {
+      this.children.some((item, index) => {
+        if (item.id === element.id) {
+          this.children.splice(index, 1)
+          return true
+        }
+      })
+    } else {
+      this.children = []
+    }
   }
   draw () {
     if (
@@ -52,7 +56,7 @@ class Canvas {
     }
   }
   clear () {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctx.clearRect(0, 0, this.width, this.height)
   }
   animate (time) {
     requestAnimationFrame(this.animate.bind(this))
