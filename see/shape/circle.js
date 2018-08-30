@@ -1,37 +1,18 @@
-import TWEEN from '@tweenjs/tween.js'
 import Element from '../element'
-import { getVal } from '../utils'
 
 export default class Circle extends Element {
-  constructor (
-    opt = {
-      from: {},
-      duration: 1000,
-      easing: 'Quadratic.Out'
-    }
-  ) {
+  constructor (opt) {
     super(opt)
-    this.attrs = Object.assign(opt, opt.from)
-    if (this.attrs.to) this.move()
-  }
-  move () {
-    let attrs = this.attrs
-    new TWEEN.Tween(attrs.from)
-      .to(attrs.to, attrs.duration)
-      .easing(getVal(TWEEN.Easing, attrs.easing))
-      .onUpdate(cur => {
-        this.attrs = Object.assign(attrs, cur)
-      })
-      .start()
+    if (this.opt.to) this.move()
   }
   draw (ctx) {
-    let attrs = this.attrs
+    let opt = this.opt
     ctx.save()
     ctx.beginPath()
-    if (attrs.stroke) ctx.strokeStyle = attrs.stroke
-    else ctx.fillStyle = attrs.fill || '#000'
-    ctx.arc(attrs.x, attrs.y, attrs.r, 0, Math.PI * 2)
-    if (attrs.stroke) ctx.stroke()
+    if (opt.stroke) ctx.strokeStyle = opt.stroke
+    else ctx.fillStyle = opt.fill || '#000'
+    ctx.arc(opt.x, opt.y, opt.r, 0, Math.PI * 2)
+    if (opt.stroke) ctx.stroke()
     else ctx.fill()
     ctx.restore()
   }
