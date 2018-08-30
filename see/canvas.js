@@ -55,11 +55,11 @@ class Canvas {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
   animate (time) {
+    requestAnimationFrame(this.animate.bind(this))
     this.clear()
     arrSort(this.children, 'zIndex').forEach(child => {
       child.draw(this.ctx)
     })
-    requestAnimationFrame(this.animate.bind(this))
     TWEEN.update(time)
   }
 }

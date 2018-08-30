@@ -6,9 +6,9 @@ var canvas = new Canvas(options);
 
 ### options
 
-| options.key | value | description         | default |
-| ----------- | ----- | ------------------- | ------- |
-| container   | DOM   | 作为容器的 dom 元素 | --      |
+| options.key | value | description                               | default |
+| ----------- | ----- | ----------------------------------------- | ------- |
+| container   | DOM   | 作为容器的 dom 元素，容器大小决定画布大小 | --      |
 
 ### 实例方法
 
@@ -37,5 +37,13 @@ canvas.removeElement(element);
 命令画布进行绘制
 
 ```js
-canvas.draw()
+canvas.draw();
+```
+
+#### clear
+
+清空画布
+
+```js
+canvas.clear();
 ```

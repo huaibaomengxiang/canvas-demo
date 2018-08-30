@@ -43,7 +43,8 @@ canvas.addElement(element3)
 
 canvas.draw()
 
-// setTimeout(() => {
-//   canvas.removeElement(element2)
-//   canvas.draw()
-// }, 2000)
+setTimeout(() => {
+  canvas.removeElement(element2)
+  element3.attr({stroke: '#4F8'})
+  canvas.draw()
+}, 1600)
